@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MainLayout from '@/components/layout/MainLayout';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -9,11 +9,16 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Plus, Trash2, Save, Eye } from 'lucide-react';
 import { Question, QuestionType } from '@/types/survey';
+import { useSurveys } from '@/hooks/useSurveys';
+import { toast } from 'sonner';
 
 const CreateSurvey = () => {
+  const navigate = useNavigate();
+  const { createSurvey } = useSurveys();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const handleAddQuestion = () => {
     const newQuestion: Question = {
@@ -72,15 +77,48 @@ const CreateSurvey = () => {
     setQuestions(questions.filter(q => q.id !== id));
   };
   
-  const handleSaveSurvey = () => {
-    // In a real app, this would save to the backend
-    console.log({
-      title,
-      description,
-      questions
-    });
-    
-    alert('تم حفظ الاستبيان بنجاح!');
+  const handleSaveSurvey = async () => {
+    try {
+      setIsSubmitting(true);
+      
+      if (!title.trim()) {
+        toast.error("يرجى إدخال عنوان الاستبيان");
+        setIsSubmitting(false);
+        return;
+      }
+      
+      if (questions.length === 0) {
+        toast.error("يرجى إضافة سؤال واحد على الأقل");
+        setIsSubmitting(false);
+        return;
+      }
+
+      const invalidQuestions = questions.filter(q => !q.title.trim());
+      if (invalidQuestions.length > 0) {
+        toast.error("يرجى إدخال نصوص لجميع الأسئلة");
+        setIsSubmitting(false);
+        return;
+      }
+      
+      await createSurvey({
+        title,
+        description,
+        questions
+      });
+      
+      navigate('/');
+    } catch (error) {
+      console.error("Error saving survey:", error);
+      toast.error("حدث خطأ أثناء حفظ الاستبيان");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
+  const handlePreview = () => {
+    const previewSurvey = { title, description, questions };
+    localStorage.setItem('surveyPreview', JSON.stringify(previewSurvey));
+    window.open('/preview', '_blank');
   };
   
   return (
@@ -88,23 +126,22 @@ const CreateSurvey = () => {
       <div className="flex justify-between items-center mb-6" dir="rtl">
         <h1 className="text-2xl font-bold text-survey-text">إنشاء استبيان جديد</h1>
         <div className="space-x-2">
-          <Button variant="outline" className="gap-1 ml-2">
+          <Button variant="outline" className="gap-1 ml-2" onClick={handlePreview}>
             <Eye size={16} />
             معاينة
           </Button>
           <Button 
             className="bg-survey-primary hover:bg-survey-accent" 
             onClick={handleSaveSurvey} 
-            disabled={!title || questions.length === 0}
+            disabled={isSubmitting || !title || questions.length === 0}
           >
             <Save size={16} className="ml-1" />
-            حفظ الاستبيان
+            {isSubmitting ? 'جاري الحفظ...' : 'حفظ الاستبيان'}
           </Button>
         </div>
       </div>
       
       <div className="space-y-6" dir="rtl">
-        {/* Survey Info */}
         <Card>
           <CardHeader>
             <h2 className="text-lg font-semibold">تفاصيل الاستبيان</h2>
@@ -132,7 +169,6 @@ const CreateSurvey = () => {
           </CardContent>
         </Card>
         
-        {/* Questions */}
         {questions.map((question, index) => (
           <Card key={question.id} className="relative">
             <CardHeader className="pb-3">
@@ -228,7 +264,6 @@ const CreateSurvey = () => {
           </Card>
         ))}
         
-        {/* Add Question Button */}
         <div className="text-center py-4">
           <Button 
             type="button"
@@ -241,12 +276,11 @@ const CreateSurvey = () => {
           </Button>
         </div>
         
-        {/* Save button */}
         <div className="flex justify-end space-x-3">
           <Button 
             className="bg-survey-primary hover:bg-survey-accent mr-3"
             onClick={handleSaveSurvey}
-            disabled={!title || questions.length === 0}
+            disabled={isSubmitting || !title || questions.length === 0}
           >
             حفظ الاستبيان
           </Button>

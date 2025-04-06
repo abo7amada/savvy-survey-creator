@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CreateSurvey from "./pages/CreateSurvey";
 import SurveyPreview from "./pages/SurveyPreview";
+import SurveyPreviewDraft from "./pages/SurveyPreviewDraft";
 import SurveyResponses from "./pages/SurveyResponses";
 
 const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/create" element={<CreateSurvey />} />
           <Route path="/surveys/:id" element={<SurveyPreview />} />
           <Route path="/surveys/:id/responses" element={<SurveyResponses />} />
+          <Route path="/preview" element={<SurveyPreviewDraft />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
