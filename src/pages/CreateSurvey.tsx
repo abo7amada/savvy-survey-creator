@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
-import { Form, FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form';
+import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Plus, Trash2, Save, Eye } from 'lucide-react';
 import { Question, QuestionType } from '@/types/survey';
@@ -110,27 +110,25 @@ const CreateSurvey = () => {
             <h2 className="text-lg font-semibold">تفاصيل الاستبيان</h2>
           </CardHeader>
           <CardContent className="space-y-4">
-            <FormItem>
-              <FormLabel>العنوان</FormLabel>
-              <FormControl>
-                <Input 
-                  placeholder="عنوان الاستبيان" 
-                  value={title} 
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </FormControl>
-            </FormItem>
-            <FormItem>
-              <FormLabel>الوصف</FormLabel>
-              <FormControl>
-                <Textarea 
-                  placeholder="وصف الاستبيان" 
-                  value={description} 
-                  onChange={(e) => setDescription(e.target.value)}
-                  rows={3}
-                />
-              </FormControl>
-            </FormItem>
+            <div className="space-y-2">
+              <Label htmlFor="title">العنوان</Label>
+              <Input 
+                id="title"
+                placeholder="عنوان الاستبيان" 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="description">الوصف</Label>
+              <Textarea 
+                id="description"
+                placeholder="وصف الاستبيان" 
+                value={description} 
+                onChange={(e) => setDescription(e.target.value)}
+                rows={3}
+              />
+            </div>
           </CardContent>
         </Card>
         
@@ -151,25 +149,24 @@ const CreateSurvey = () => {
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
-              <FormItem>
-                <FormLabel>نص السؤال</FormLabel>
-                <FormControl>
-                  <Input 
-                    placeholder="أدخل سؤالك هنا" 
-                    value={question.title} 
-                    onChange={(e) => handleQuestionChange(question.id, 'title', e.target.value)}
-                  />
-                </FormControl>
-              </FormItem>
+              <div className="space-y-2">
+                <Label htmlFor={`question-${question.id}`}>نص السؤال</Label>
+                <Input 
+                  id={`question-${question.id}`}
+                  placeholder="أدخل سؤالك هنا" 
+                  value={question.title} 
+                  onChange={(e) => handleQuestionChange(question.id, 'title', e.target.value)}
+                />
+              </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <FormItem>
-                  <FormLabel>نوع السؤال</FormLabel>
+                <div className="space-y-2">
+                  <Label htmlFor={`question-type-${question.id}`}>نوع السؤال</Label>
                   <Select 
                     value={question.type}
                     onValueChange={(value: QuestionType) => handleQuestionChange(question.id, 'type', value)}
                   >
-                    <SelectTrigger>
+                    <SelectTrigger id={`question-type-${question.id}`}>
                       <SelectValue placeholder="اختر النوع" />
                     </SelectTrigger>
                     <SelectContent>
@@ -180,24 +177,23 @@ const CreateSurvey = () => {
                       <SelectItem value="rating">تقييم</SelectItem>
                     </SelectContent>
                   </Select>
-                </FormItem>
+                </div>
                 
-                <FormItem className="flex items-center gap-2">
-                  <FormLabel>مطلوب</FormLabel>
-                  <FormControl>
-                    <input 
-                      type="checkbox" 
-                      checked={question.required} 
-                      onChange={(e) => handleQuestionChange(question.id, 'required', e.target.checked)}
-                      className="h-4 w-4"
-                    />
-                  </FormControl>
-                </FormItem>
+                <div className="flex items-center gap-2">
+                  <Label htmlFor={`required-${question.id}`} className="cursor-pointer">مطلوب</Label>
+                  <input 
+                    id={`required-${question.id}`}
+                    type="checkbox" 
+                    checked={question.required} 
+                    onChange={(e) => handleQuestionChange(question.id, 'required', e.target.checked)}
+                    className="h-4 w-4"
+                  />
+                </div>
               </div>
               
               {['multipleChoice', 'checkbox', 'dropdown'].includes(question.type) && (
                 <div className="space-y-3">
-                  <FormLabel>الخيارات</FormLabel>
+                  <Label>الخيارات</Label>
                   {(question.options || []).map((option) => (
                     <div key={option.id} className="flex gap-2">
                       <Input 
