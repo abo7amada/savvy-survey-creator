@@ -8,7 +8,7 @@ import MultipleChoiceQuestion from '@/components/survey/questions/MultipleChoice
 import CheckboxQuestion from '@/components/survey/questions/CheckboxQuestion';
 import RatingQuestion from '@/components/survey/questions/RatingQuestion';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { toast } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 
 const SurveyPreview = () => {
   const { id } = useParams<{ id: string }>();
