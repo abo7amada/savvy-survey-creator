@@ -16,7 +16,7 @@ const RatingQuestion = ({ question, value, onChange }: RatingQuestionProps) => {
   
   return (
     <QuestionBase question={question}>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2" dir="rtl">
         {ratings.map((rating) => (
           <button
             key={rating}

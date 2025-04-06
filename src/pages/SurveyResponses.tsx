@@ -24,8 +24,8 @@ const SurveyResponses = () => {
   if (!survey) {
     return (
       <MainLayout>
-        <div className="text-center py-12">
-          <p className="text-survey-textLight">Survey not found</p>
+        <div className="text-center py-12" dir="rtl">
+          <p className="text-survey-textLight">الاستبيان غير موجود</p>
         </div>
       </MainLayout>
     );
@@ -33,56 +33,56 @@ const SurveyResponses = () => {
   
   // Mock data for charts
   const multipleChoiceData = [
-    { name: 'Quality', value: 42 },
-    { name: 'Price', value: 28 },
-    { name: 'Customer Support', value: 35 },
-    { name: 'Ease of Use', value: 22 }
+    { name: 'الجودة', value: 42 },
+    { name: 'السعر', value: 28 },
+    { name: 'خدمة العملاء', value: 35 },
+    { name: 'سهولة الاستخدام', value: 22 }
   ];
   
   const ratingData = [
-    { name: '1 Star', value: 5 },
-    { name: '2 Stars', value: 12 },
-    { name: '3 Stars', value: 25 },
-    { name: '4 Stars', value: 38 },
-    { name: '5 Stars', value: 47 }
+    { name: 'نجمة واحدة', value: 5 },
+    { name: 'نجمتان', value: 12 },
+    { name: '٣ نجوم', value: 25 },
+    { name: '٤ نجوم', value: 38 },
+    { name: '٥ نجوم', value: 47 }
   ];
   
   const COLORS = ['#6366f1', '#8b5cf6', '#4f46e5', '#a855f7', '#3730a3'];
   
   return (
     <MainLayout>
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-survey-text">{survey.title} - Responses</h1>
+      <div className="flex justify-between items-center mb-6" dir="rtl">
+        <h1 className="text-2xl font-bold text-survey-text">{survey.title} - الردود</h1>
         <div className="px-3 py-1 bg-survey-primary text-white rounded-full">
-          {survey.responses} responses
+          {survey.responses} رد
         </div>
       </div>
       
-      <Tabs defaultValue="summary" className="w-full">
+      <Tabs defaultValue="summary" className="w-full" dir="rtl">
         <TabsList className="mb-6">
-          <TabsTrigger value="summary">Summary</TabsTrigger>
-          <TabsTrigger value="individual">Individual Responses</TabsTrigger>
-          <TabsTrigger value="export">Export</TabsTrigger>
+          <TabsTrigger value="summary">ملخص</TabsTrigger>
+          <TabsTrigger value="individual">الردود الفردية</TabsTrigger>
+          <TabsTrigger value="export">تصدير</TabsTrigger>
         </TabsList>
         
         <TabsContent value="summary">
           <div className="space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Overview</CardTitle>
+                <CardTitle className="text-lg">نظرة عامة</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-3 gap-4 text-center">
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-survey-textLight">Total Responses</p>
+                    <p className="text-survey-textLight">إجمالي الردود</p>
                     <p className="text-3xl font-bold text-survey-text">{survey.responses}</p>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-survey-textLight">Completion Rate</p>
+                    <p className="text-survey-textLight">معدل الإكمال</p>
                     <p className="text-3xl font-bold text-survey-text">94%</p>
                   </div>
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-survey-textLight">Avg. Completion Time</p>
+                    <p className="text-survey-textLight">متوسط وقت الإكمال</p>
                     <p className="text-3xl font-bold text-survey-text">3:24</p>
                   </div>
                 </div>
@@ -92,14 +92,14 @@ const SurveyResponses = () => {
             {/* Chart for Question 1 */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">How satisfied are you with our service?</CardTitle>
+                <CardTitle className="text-lg">ما مدى رضاك عن خدمتنا؟</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="h-64">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={ratingData} layout="vertical">
                       <XAxis type="number" />
-                      <YAxis dataKey="name" type="category" width={80} />
+                      <YAxis dataKey="name" type="category" width={100} />
                       <Tooltip />
                       <Bar dataKey="value" fill="#6366f1" radius={[0, 4, 4, 0]} />
                     </BarChart>
@@ -111,7 +111,7 @@ const SurveyResponses = () => {
             {/* Chart for Question 2 */}
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">What aspects of our service do you like the most?</CardTitle>
+                <CardTitle className="text-lg">ما هي جوانب خدمتنا التي تفضلها أكثر؟</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="h-72 flex justify-center">
@@ -143,7 +143,7 @@ const SurveyResponses = () => {
         <TabsContent value="individual">
           <Card>
             <CardContent className="pt-6">
-              <p className="text-survey-textLight text-center">Individual response data would be listed here.</p>
+              <p className="text-survey-textLight text-center">سيتم عرض بيانات الردود الفردية هنا.</p>
             </CardContent>
           </Card>
         </TabsContent>
@@ -151,7 +151,7 @@ const SurveyResponses = () => {
         <TabsContent value="export">
           <Card>
             <CardContent className="pt-6">
-              <p className="text-survey-textLight text-center">Export options would be available here.</p>
+              <p className="text-survey-textLight text-center">خيارات التصدير ستكون متاحة هنا.</p>
             </CardContent>
           </Card>
         </TabsContent>

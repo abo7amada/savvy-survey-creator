@@ -18,10 +18,10 @@ const SurveyPreview = () => {
   
   if (!survey) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-survey-background">
+      <div className="min-h-screen flex items-center justify-center bg-survey-background" dir="rtl">
         <Card className="w-full max-w-md">
           <CardContent className="pt-6">
-            <p className="text-center text-survey-textLight">Survey not found</p>
+            <p className="text-center text-survey-textLight">الاستبيان غير موجود</p>
           </CardContent>
         </Card>
       </div>
@@ -58,14 +58,14 @@ const SurveyPreview = () => {
     });
     
     if (unansweredRequired.length > 0) {
-      toast.error("Please answer all required questions");
+      toast.error("يرجى الإجابة على جميع الأسئلة المطلوبة");
       return;
     }
     
     // In a real app, this would submit to the backend
-    console.log('Submitting answers:', answers);
+    console.log('تقديم الإجابات:', answers);
     
-    toast.success("Survey submitted successfully!");
+    toast.success("تم تقديم الاستبيان بنجاح!");
     setAnswers({});
   };
   
@@ -109,7 +109,7 @@ const SurveyPreview = () => {
   };
   
   return (
-    <div className="min-h-screen py-8 px-4 bg-survey-background">
+    <div className="min-h-screen py-8 px-4 bg-survey-background" dir="rtl">
       <div className="max-w-3xl mx-auto">
         <Card className="mb-6">
           <CardHeader className="pb-4">
@@ -133,7 +133,7 @@ const SurveyPreview = () => {
             className="bg-survey-primary hover:bg-survey-accent px-8"
             onClick={handleSubmit}
           >
-            Submit
+            إرسال
           </Button>
         </div>
       </div>

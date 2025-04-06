@@ -14,10 +14,11 @@ const TextQuestion = ({ question, value, onChange }: TextQuestionProps) => {
   return (
     <QuestionBase question={question}>
       <Textarea 
-        placeholder="Type your answer here" 
+        placeholder="اكتب إجابتك هنا" 
         value={value || ""} 
         onChange={(e) => onChange(question.id, e.target.value)} 
         className="w-full resize-none"
+        dir="rtl"
       />
     </QuestionBase>
   );

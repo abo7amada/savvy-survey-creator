@@ -10,7 +10,7 @@ interface QuestionBaseProps {
 
 const QuestionBase = ({ question, children }: QuestionBaseProps) => {
   return (
-    <Card className="mb-4">
+    <Card className="mb-4" dir="rtl">
       <CardHeader className="pb-2">
         <CardTitle className="text-lg font-medium flex items-center gap-2">
           {question.title}

@@ -4,30 +4,30 @@ import { Survey } from '@/types/survey';
 export const mockSurveys: Survey[] = [
   {
     id: '1',
-    title: 'Customer Satisfaction Survey',
-    description: 'Help us improve our services by providing your feedback',
+    title: 'استبيان رضا العملاء',
+    description: 'ساعدنا في تحسين خدماتنا من خلال تقديم ملاحظاتك',
     questions: [
       {
         id: 'q1',
-        title: 'How satisfied are you with our service?',
+        title: 'ما مدى رضاك عن خدمتنا؟',
         type: 'rating',
         required: true
       },
       {
         id: 'q2',
-        title: 'What aspects of our service do you like the most?',
+        title: 'ما هي جوانب خدمتنا التي تفضلها أكثر؟',
         type: 'multipleChoice',
         required: false,
         options: [
-          { id: 'o1', text: 'Quality' },
-          { id: 'o2', text: 'Price' },
-          { id: 'o3', text: 'Customer Support' },
-          { id: 'o4', text: 'Ease of Use' }
+          { id: 'o1', text: 'الجودة' },
+          { id: 'o2', text: 'السعر' },
+          { id: 'o3', text: 'دعم العملاء' },
+          { id: 'o4', text: 'سهولة الاستخدام' }
         ]
       },
       {
         id: 'q3',
-        title: 'Any suggestions for improvement?',
+        title: 'هل لديك أي اقتراحات للتحسين؟',
         type: 'text',
         required: false
       }
@@ -37,22 +37,22 @@ export const mockSurveys: Survey[] = [
   },
   {
     id: '2',
-    title: 'Product Feedback',
-    description: 'Tell us what you think about our new product',
+    title: 'ملاحظات عن المنتج',
+    description: 'أخبرنا رأيك عن منتجنا الجديد',
     questions: [
       {
         id: 'q1',
-        title: 'Have you used our product before?',
+        title: 'هل استخدمت منتجنا من قبل؟',
         type: 'multipleChoice',
         required: true,
         options: [
-          { id: 'o1', text: 'Yes' },
-          { id: 'o2', text: 'No' }
+          { id: 'o1', text: 'نعم' },
+          { id: 'o2', text: 'لا' }
         ]
       },
       {
         id: 'q2',
-        title: 'How would you rate the product quality?',
+        title: 'كيف تقيم جودة المنتج؟',
         type: 'rating',
         required: true
       }
@@ -62,25 +62,25 @@ export const mockSurveys: Survey[] = [
   },
   {
     id: '3',
-    title: 'Website Usability Survey',
-    description: 'Help us improve our website experience',
+    title: 'استبيان سهولة استخدام الموقع',
+    description: 'ساعدنا في تحسين تجربة موقعنا الإلكتروني',
     questions: [
       {
         id: 'q1',
-        title: 'How easy was it to find what you were looking for?',
+        title: 'ما مدى سهولة العثور على ما كنت تبحث عنه؟',
         type: 'rating',
         required: true
       },
       {
         id: 'q2',
-        title: 'Which features do you use most often?',
+        title: 'ما هي الميزات التي تستخدمها في كثير من الأحيان؟',
         type: 'checkbox',
         required: false,
         options: [
-          { id: 'o1', text: 'Search' },
-          { id: 'o2', text: 'Filters' },
-          { id: 'o3', text: 'User Reviews' },
-          { id: 'o4', text: 'Product Comparisons' }
+          { id: 'o1', text: 'البحث' },
+          { id: 'o2', text: 'الفلاتر' },
+          { id: 'o3', text: 'تقييمات المستخدمين' },
+          { id: 'o4', text: 'مقارنة المنتجات' }
         ]
       }
     ],

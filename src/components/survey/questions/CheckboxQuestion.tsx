@@ -24,9 +24,9 @@ const CheckboxQuestion = ({ question, value, onChange }: CheckboxQuestionProps) 
 
   return (
     <QuestionBase question={question}>
-      <div className="space-y-2">
+      <div className="space-y-2" dir="rtl">
         {question.options?.map((option) => (
-          <div key={option.id} className="flex items-center space-x-2">
+          <div key={option.id} className="flex items-center">
             <Checkbox 
               id={option.id} 
               checked={(value || []).includes(option.id)}
@@ -34,7 +34,7 @@ const CheckboxQuestion = ({ question, value, onChange }: CheckboxQuestionProps) 
                 handleCheckboxChange(option.id, checked === true)
               }
             />
-            <Label htmlFor={option.id} className="cursor-pointer">{option.text}</Label>
+            <Label htmlFor={option.id} className="cursor-pointer mr-2">{option.text}</Label>
           </div>
         ))}
       </div>

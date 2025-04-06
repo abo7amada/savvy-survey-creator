@@ -18,11 +18,12 @@ const MultipleChoiceQuestion = ({ question, value, onChange }: MultipleChoiceQue
         value={value || ""} 
         onValueChange={(value) => onChange(question.id, value)}
         className="space-y-2"
+        dir="rtl"
       >
         {question.options?.map((option) => (
           <div key={option.id} className="flex items-center space-x-2">
             <RadioGroupItem value={option.id} id={option.id} />
-            <Label htmlFor={option.id} className="cursor-pointer">{option.text}</Label>
+            <Label htmlFor={option.id} className="cursor-pointer mr-2">{option.text}</Label>
           </div>
         ))}
       </RadioGroup>
